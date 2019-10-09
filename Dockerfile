@@ -1,6 +1,10 @@
+From alpine/git as clone
+WORKDIR /app
+RUN git clone https://github.com/Rock46/dockmvn.git
+
 FROM maven:3-alpine as build
 WORKDIR /app
-RUN git clone https://github.com/Rock46/dockjenmvn.git
+COPY --from=clone /app/* /app
 RUN mvn clean package
 
 FROM tomcat:8.0.51-jre8-alpine
