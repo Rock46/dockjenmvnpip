@@ -1,7 +1,4 @@
 FROM tomcat:8.0
-RUN mkdir /myApp
-RUN chown -R root:root /myApp
-VOLUME /myApp
-RUN cp /var/lib/jenkins/workspace/Docker_Jenkins_Pip_Decl_4/target/hello-world-war-1.0.0.war myApp
-COPY myapp /usr/local/tomcat/webapps/
-
+RUN rm -fr /usr/local/tomcat/webapps/ROOT
+COPY ./target/hello-world-war-1.0.0.war /usr/local/tomcat/webapps/ROOT.war
+CMD ["catalina.sh", "run"]
